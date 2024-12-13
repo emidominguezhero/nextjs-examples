@@ -14,7 +14,7 @@ export default async function RickAndMortyPageServer() {
 		if (page) {
 			currentPage = Number(page);
 			characters = await rickAndMortyService.getCharacters(currentPage);
-			revalidatePath("/rick-and-morty");
+			revalidatePath("/rick-and-morty-server");
 		}
 	}
 
