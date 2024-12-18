@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { clamp } from "@/utilities/helpers";
 import rickAndMortyService from "@/services/rick-and-morty";
 
 export default function RickAndMortyPageClient() {
@@ -14,7 +15,7 @@ export default function RickAndMortyPageClient() {
 
 	return (
 		<div>
-			<h1>Rick and Morty episodes</h1>
+			<h1 style={{ marginBottom: "2rem" }}>Episodes</h1>
 
 			<div
 				style={{
@@ -40,8 +41,4 @@ export default function RickAndMortyPageClient() {
 			</ul>
 		</div>
 	);
-}
-
-function clamp(value: number, min: number, max: number): number {
-	return Math.min(Math.max(value, min), max);
 }

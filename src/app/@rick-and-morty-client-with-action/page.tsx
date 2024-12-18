@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { clamp } from "@/utilities/helpers";
 import { getLocationsAction } from "./actions";
+
 export default function RickAndMortyPageClientWithAction() {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const [locations, setLocations] = useState<any[]>([]);
@@ -13,7 +15,7 @@ export default function RickAndMortyPageClientWithAction() {
 
 	return (
 		<div>
-			<h1>Rick and Morty locations</h1>
+			<h1 style={{ marginBottom: "2rem" }}>Locations</h1>
 
 			<div
 				style={{
@@ -39,8 +41,4 @@ export default function RickAndMortyPageClientWithAction() {
 			</ul>
 		</div>
 	);
-}
-
-function clamp(value: number, min: number, max: number): number {
-	return Math.min(Math.max(value, min), max);
 }

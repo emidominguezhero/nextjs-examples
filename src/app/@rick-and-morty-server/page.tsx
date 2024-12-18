@@ -6,7 +6,7 @@ let currentPage = 1;
 let characters = await rickAndMortyService.getCharacters(currentPage);
 
 export default async function RickAndMortyPageServer() {
-	async function changePage(formData: FormData): Promise<void> {
+	async function updateCharacters(formData: FormData): Promise<void> {
 		"use server";
 
 		const page = formData.get("page") as string;
@@ -14,15 +14,15 @@ export default async function RickAndMortyPageServer() {
 		if (page) {
 			currentPage = Number(page);
 			characters = await rickAndMortyService.getCharacters(currentPage);
-			revalidatePath("/rick-and-morty-server");
+			revalidatePath("/@rick-and-morty-server", "page");
 		}
 	}
 
 	return (
 		<div>
-			<h1>Rick and Morty characters</h1>
+			<h1 style={{ marginBottom: "2rem" }}>Characters</h1>
 
-			<form action={changePage}>
+			<form action={updateCharacters}>
 				<label>
 					Page:
 					<input type="number" name="page" min={1} defaultValue={currentPage} />
@@ -39,7 +39,8 @@ export default async function RickAndMortyPageServer() {
 							style={{
 								display: "flex",
 								alignItems: "center",
-								gap: "1rem"
+								gap: "1rem",
+								marginTop: "1rem"
 							}}
 						>
 							<Image src={character.image} alt={character.name} width={50} height={50} />
