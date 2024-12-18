@@ -5,7 +5,7 @@ import rickAndMortyService from "@/services/rick-and-morty";
 let currentPage = 1;
 let characters = await rickAndMortyService.getCharacters(currentPage);
 
-export default async function RickAndMortyPageServer() {
+export async function Server(props: { path: string }) {
 	async function updateCharacters(formData: FormData): Promise<void> {
 		"use server";
 
@@ -14,7 +14,7 @@ export default async function RickAndMortyPageServer() {
 		if (page) {
 			currentPage = Number(page);
 			characters = await rickAndMortyService.getCharacters(currentPage);
-			revalidatePath("/@rick-and-morty-server", "page");
+			revalidatePath(props.path, "page");
 		}
 	}
 

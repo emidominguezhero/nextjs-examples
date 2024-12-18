@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { clamp } from "@/utilities/helpers";
-import { getLocationsAction } from "./actions";
+import rickAndMortyService from "@/services/rick-and-morty";
 
-export default function RickAndMortyPageClientWithAction() {
+export function Client() {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const [locations, setLocations] = useState<any[]>([]);
+	const [episodes, setEpisodes] = useState<any[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		getLocationsAction(currentPage).then(setLocations);
+		rickAndMortyService.getEpisodes(currentPage).then(setEpisodes);
 	}, [currentPage]);
 
 	return (
 		<div>
-			<h1 style={{ marginBottom: "2rem" }}>Locations</h1>
+			<h1 style={{ marginBottom: "2rem" }}>Episodes</h1>
 
 			<div
 				style={{
@@ -29,8 +29,8 @@ export default function RickAndMortyPageClientWithAction() {
 			</div>
 
 			<ul>
-				{locations?.length ? (
-					locations.map((episode) => (
+				{episodes?.length ? (
+					episodes.map((episode) => (
 						<li key={episode.name} style={{ padding: "1rem" }}>
 							<p>{episode.name}</p>
 						</li>
